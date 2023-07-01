@@ -21,13 +21,15 @@ class CheckPasswordField extends StatefulWidget {
 }
 
 class _CheckPasswordFieldState extends State<CheckPasswordField> {
-  final _textController = TextEditingController();
-  var enabled = false;
+  final _textController1 = TextEditingController();
+  final _textController2 = TextEditingController();
+  var enabled = true;
 
   var ishasData = true;
   void _textFieldListener() {
     setState(() {
-      ishasData = _textController.text.isEmpty;
+      ishasData = _textController1.text.isEmpty;
+      ishasData = _textController2.text.isEmpty;
     });
   }
 
@@ -38,7 +40,7 @@ class _CheckPasswordFieldState extends State<CheckPasswordField> {
         SizedBox(
           height: 60,
           child: TextFormField(
-            controller: _textController,
+            controller: _textController1,
             style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
             onChanged: (value) => _textFieldListener(),
             decoration: InputDecoration(
@@ -93,6 +95,7 @@ class _CheckPasswordFieldState extends State<CheckPasswordField> {
         SizedBox(
           height: 60,
           child: TextFormField(
+            controller: _textController2,
             style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
             onChanged: (value) => _textFieldListener(),
             decoration: InputDecoration(
@@ -122,13 +125,14 @@ class _CheckPasswordFieldState extends State<CheckPasswordField> {
                 ),
               ),
             ),
+            obscureText: true,
             textCapitalization: TextCapitalization.words,
             textInputAction: TextInputAction.done,
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "Iltimos iltimos parol qayta kiriting";
-              } else if (value != _textController.text) {
+              } else if (value != _textController1.text) {
                 return "noto'g'ri parol  ko`rtingiz";
               }
               return null;

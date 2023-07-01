@@ -6,6 +6,7 @@ import 'package:registration_ui/constatns/app_colors.dart';
 import 'package:registration_ui/constatns/app_icons.dart';
 import 'package:registration_ui/constatns/text_styles.dart';
 import 'package:registration_ui/registration/widgets/check_password_field.dart';
+import 'package:registration_ui/registration/widgets/eneter_phonenumber_field.dart';
 import 'package:registration_ui/registration/widgets/select_bithday.dart';
 import 'package:registration_ui/registration/widgets/text_input_field.dart';
 
@@ -28,7 +29,6 @@ class RegistrationPage extends StatelessWidget {
       }
     }
 
-    
     return Scaffold(
       body: SafeArea(
           child: Form(
@@ -77,28 +77,17 @@ class RegistrationPage extends StatelessWidget {
                         keyboardtype: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: 15),
-                      TextInputField(
-                        data: SignUpData,
-                        kiy: 'phonenumber',
-                        icon: AppIcons.phone,
-                        hint: 'Телефон',
-                        keyboardtype: TextInputType.phone,
-                      ),
-                      const SizedBox(height: 15),
-                      const SelectBirthday(),
+                      EnteredPhonenumber(data: SignUpData, kiy: 'phonenumber'),
                       // TextInputField(
                       //   data: SignUpData,
-                      //   kiy: 'birthday',
-                      //   icon: AppIcons.birthday,
-                      //   hint: 'Дата рождения',
+                      //   kiy: 'phonenumber',
+                      //   icon: AppIcons.phone,
+                      //   hint: 'Телефон',
                       //   keyboardtype: TextInputType.phone,
-                      //   action: IconButton(
-                      //     onPressed: () => showcalendar(context),
-                      //     icon: SvgPicture.asset(
-                      //       AppIcons.calendar,
-                      //     ),
-                      //   ),
                       // ),
+                      const SizedBox(height: 15),
+                      const SelectBirthday(),
+
                       const SizedBox(height: 15),
                       CheckPasswordField(
                         data: SignUpData,
