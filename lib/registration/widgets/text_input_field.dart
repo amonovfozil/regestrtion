@@ -38,52 +38,50 @@ class _TextInputFieldState extends State<TextInputField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: TextFormField(
-        style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
-        controller: _textController,
-        onChanged: (value) => _textFieldListener(),
-        decoration: InputDecoration(
-          hintText: widget.hint,
-          hintStyle: AppStyles.variablestyle(17, FontWeight.w400, hintColor),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: borderColor,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            ),
+    return TextFormField(
+      style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
+      controller: _textController,
+      onChanged: (value) => _textFieldListener(),
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 15),
+        hintText: widget.hint,
+        hintStyle: AppStyles.variablestyle(17, FontWeight.w400, hintColor),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: borderColor,
           ),
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: borderColor,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
           ),
-          prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: SvgPicture.asset(
-              widget.icon,
-              alignment: Alignment.center,
-              color: ishasData ? Colors.red : Colors.grey,
-            ),
-          ),
-          suffixIcon: widget.action,
         ),
-        textCapitalization: TextCapitalization.words,
-        textInputAction: TextInputAction.next,
-        keyboardType: widget.keyboardtype,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "Maydonni to'ldiring!";
-          }
-          return null;
-        },
-        onSaved: (newValue) => widget.data[widget.kiy] = newValue!,
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: borderColor,
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+        ),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: SvgPicture.asset(
+            widget.icon,
+            alignment: Alignment.center,
+            color: ishasData ? Colors.red : Colors.grey,
+          ),
+        ),
+        suffixIcon: widget.action,
       ),
+      textCapitalization: TextCapitalization.words,
+      textInputAction: TextInputAction.next,
+      keyboardType: widget.keyboardtype,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Maydonni to'ldiring!";
+        }
+        return null;
+      },
+      onSaved: (newValue) => widget.data[widget.kiy] = newValue!,
     );
   }
 }
