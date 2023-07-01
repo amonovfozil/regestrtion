@@ -29,13 +29,11 @@ class _EnteredPhonenumberState extends State<EnteredPhonenumber> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
       style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
       controller: _textController,
       onChanged: (value) => _textFieldListener(),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 15),
-
         hintText: 'Телефон',
         hintStyle: AppStyles.variablestyle(17, FontWeight.w400, hintColor),
         enabledBorder: const OutlineInputBorder(
@@ -66,8 +64,8 @@ class _EnteredPhonenumberState extends State<EnteredPhonenumber> {
               ),
               Text(
                 '+998',
-                style: AppStyles.variablestyle(
-                    16, FontWeight.w700, primaryColor),
+                style:
+                    AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
               ),
             ],
           ),
