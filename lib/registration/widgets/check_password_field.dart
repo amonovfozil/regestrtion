@@ -22,6 +22,7 @@ class CheckPasswordField extends StatefulWidget {
 
 class _CheckPasswordFieldState extends State<CheckPasswordField> {
   final _textController = TextEditingController();
+  var enabled = false;
 
   var ishasData = true;
   void _textFieldListener() {
@@ -34,77 +35,105 @@ class _CheckPasswordFieldState extends State<CheckPasswordField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-          controller: _textController,
-          onChanged: (value) => _textFieldListener(),
-          decoration: InputDecoration(
-            hintText: 'Пароль',
-            hintStyle: AppStyles.variablestyle(17, FontWeight.w400, hintColor),
-            filled: true,
-            fillColor: Colors.white,
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: borderColor),
-              borderRadius: BorderRadius.all(
-                Radius.circular(18),
+        SizedBox(
+          height: 60,
+          child: TextFormField(
+            controller: _textController,
+            style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
+            onChanged: (value) => _textFieldListener(),
+            decoration: InputDecoration(
+              hintText: 'Пароль',
+              hintStyle:
+                  AppStyles.variablestyle(17, FontWeight.w400, hintColor),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: borderColor,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
               ),
-            ),
-            prefixIcon: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: SvgPicture.asset(
-                AppIcons.password,
-                alignment: Alignment.center,
-                color: ishasData ? Colors.red : Colors.grey,
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: borderColor),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
               ),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: SvgPicture.asset(
+                  AppIcons.password,
+                  alignment: Alignment.center,
+                  color: ishasData ? Colors.red : Colors.grey,
+                ),
+              ),
+              suffixIcon: IconButton(
+                  onPressed: () => setState(() {
+                        enabled = !enabled;
+                      }),
+                  icon: SvgPicture.asset(
+                    AppIcons.eye,
+                    color: enabled ? Colors.black : null,
+                  )),
             ),
-            suffixIcon: IconButton(
-                onPressed: null, icon: SvgPicture.asset(AppIcons.eye)),
+            obscureText: enabled,
+            textCapitalization: TextCapitalization.words,
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.text,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "iltimos parol kiriting";
+              }
+              return null;
+            },
+            onSaved: (newValue) => widget.data[widget.kiy] = newValue!,
           ),
-          textCapitalization: TextCapitalization.words,
-          textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.text,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "iltimos parol kiriting";
-            }
-            return null;
-          },
-          onSaved: (newValue) => widget.data[widget.kiy] = newValue!,
         ),
         const SizedBox(height: 15),
-        TextFormField(
-          style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
-          onChanged: (value) => _textFieldListener(),
-          decoration: InputDecoration(
-            hintText: 'Повторите пароль',
-            hintStyle: AppStyles.variablestyle(17, FontWeight.w400, hintColor),
-            filled: true,
-            fillColor: Colors.white,
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: borderColor),
-              borderRadius: BorderRadius.all(
-                Radius.circular(18),
+        SizedBox(
+          height: 60,
+          child: TextFormField(
+            style: AppStyles.variablestyle(16, FontWeight.w700, primaryColor),
+            onChanged: (value) => _textFieldListener(),
+            decoration: InputDecoration(
+              hintText: 'Повторите пароль',
+              hintStyle:
+                  AppStyles.variablestyle(17, FontWeight.w400, hintColor),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: borderColor,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
+              ),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: borderColor),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
+              ),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: SvgPicture.asset(
+                  AppIcons.password,
+                  alignment: Alignment.center,
+                  color: ishasData ? Colors.red : Colors.grey,
+                ),
               ),
             ),
-            prefixIcon: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: SvgPicture.asset(
-                AppIcons.password,
-                alignment: Alignment.center,
-                color: ishasData ? Colors.red : Colors.grey,
-              ),
-            ),
+            textCapitalization: TextCapitalization.words,
+            textInputAction: TextInputAction.done,
+            keyboardType: TextInputType.text,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Iltimos iltimos parol qayta kiriting";
+              } else if (value != _textController.text) {
+                return "noto'g'ri parol  ko`rtingiz";
+              }
+              return null;
+            },
           ),
-          textCapitalization: TextCapitalization.words,
-          textInputAction: TextInputAction.done,
-          keyboardType: TextInputType.text,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Iltimos iltimos parol qayta kiriting";
-            } else if (value != _textController.text) {
-              return "noto'g'ri parol  ko`rtingiz";
-            }
-            return null;
-          },
         ),
       ],
     );
