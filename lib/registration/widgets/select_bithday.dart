@@ -64,6 +64,7 @@ class _SelectBirthdayState extends State<SelectBirthday> {
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: SvgPicture.asset(
               AppIcons.birthday,
+              color: selectDate == null ? null : Colors.grey,
             ),
           ),
           Text(
