@@ -31,9 +31,9 @@ class _TextInputFieldState extends State<TextInputField> {
 
   var ishasData = true;
   void _textFieldListener() {
-    // setState(() {
-    //   ishasData = _textController.text.isEmpty;
-    // });
+    setState(() {
+      ishasData = _textController.text.isEmpty;
+    });
   }
 
   @override
